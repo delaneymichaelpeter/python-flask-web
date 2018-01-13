@@ -16,7 +16,6 @@
 from flask import *
 
 import boto3
-# from urllib.request import urlopen
 from urllib import urlopen
 from socket import gethostname
 from time   import time
@@ -26,15 +25,28 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-	# print("ec2_ip=" + get_ec2_ip())
+@app.route('/index')
+def home():
 	user = {'username': 'Peter'}
 	return render_template("index.html", user=user)
 
+@app.route('/hello')
+def hello_world():
+	user = {'username': 'Peter Delaney'}
+	return render_template("hello.html", user=user)
+
+
+@app.route('/ip')
 def get_ec2_ip():
-	# ec2 = boto3.resource('ec2')	
-	data = urlopen("http://169.254.169.254/latest/meta-data/public-ipv4").read()
-	print(data)
+	# url = "http://169.254.169.254/latest/meta-data/public-ipv4"
+	url = "http://whatsmyip.com"
+	# data = urlopen("http://169.254.169.254/latest/meta-data/public-ipv4").read()
+	metadata = urlopen(url).read().decode('utf-8')
+	print(metadata)
+	meta = {'meta_data': metadata}
+	data = {'ip_address': '111.111.111.111'}
+	# return render_template("machine.html", machine=data)
+	return render_template("machine.html", machine=data, meta=meta)
 
 
 if __name__ == '__main__':
