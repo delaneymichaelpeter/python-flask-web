@@ -62,7 +62,7 @@ def get_ec2_ip():
 	data = urlopen(url + "instance-type").read().decode('utf-8')
 	type = {'instance_type': data}
 
-	return render_template("machine.html", machine=data, sg=sg, id=id, ami=ami, type=type)
+	return render_template("machine.html", machine=meta, sg=sg, id=id, ami=ami, type=type)
 
 
 if __name__ == '__main__':
