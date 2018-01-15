@@ -36,18 +36,26 @@ def hello_world():
 	return render_template("hello.html", user=user)
 
 
-@app.route('/ip')
+
 def get_ec2_ip():
-	# url = "http://169.254.169.254/latest/meta-data/public-ipv4"
-	url = "http://whatsmyip.com"
-	# data = urlopen("http://169.254.169.254/latest/meta-data/public-ipv4").read()
-	metadata = urlopen(url).read().decode('utf-8')
-	print(metadata)
-	meta = {'meta_data': metadata}
-	data = {'ip_address': '111.111.111.111'}
-	# return render_template("machine.html", machine=data)
-	return render_template("machine.html", machine=data, meta=meta)
+	url = "http://ifconfig.me"
+	# url = "http://169.254.169.254/latest/meta-data/"
+
+	# IP Address 
+	data = urlopen(url + "public-ipv4").read().decode('utf-8')
+	meta = {'public-ipv4': data}
+
+	# Security Group
+	data = urlopen(url + "security-groups").read().decode('utf-8')
+	sg   = {'security-groups': data}
+
+	# Instance Id
+	data = urlopen(url + "instance-id").read().decode('utf-8')
+	id   = {'instance-id': data}
+
+	return render_template("machine.html", machine=data, sg=sg, id=id)
 
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=5000)
+    # app.run(host="localhost", port=5000)
+    app.run(host="0.0.0.0", port=5000)
