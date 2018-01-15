@@ -36,11 +36,10 @@ def hello_world():
 	return render_template("hello.html", user=user)
 
 
-
+''' This will spit out the meta-data information on an ec2 instance '''
 @app.route('/ip')
 def get_ec2_ip():
-	url = "http://ifconfig.me"
-	# url = "http://169.254.169.254/latest/meta-data/"
+	url = "http://169.254.169.254/latest/meta-data/"
 
 	# IP Address 
 	data = urlopen(url + "public-ipv4").read().decode('utf-8')
