@@ -5,8 +5,10 @@
     <title>Machine IP Page</title>
 </head>
 <body>
-    <h1>Machine IP      <font color="red">{{machine.public-ipv4}} </font> from meta-data</h1>
-    <h2>Security Groups <font color="red">{{sg.security-groups}} </font> from meta-data</h2>
-    <h2>Instance-Id     <font color="red">{{id.instance-id}} </font> from meta-data</h2>
+    <h1>Machine IP      <font color="red">{{machine.public_ipv4}} </font> from meta-data</h1>
+    <h2>Instance-Type   <font color="red">{{type.instance_type}} </font> from meta-data</h2>
+    <h2>Security Groups <font color="red">{{sg.security_groups}} </font> from meta-data</h2>
+    <h2>Instance-Id     <font color="red">{{id.instance_id}} </font> from meta-data</h2>
+    <h2>AMI-Id          <font color="red">{{ami.ami_id}} </font> from meta-data</h2>
 </body>
 </html>
